@@ -1,2 +1,3 @@
-Projeto criado com nest new 05-nest-clean.
-Configurações com docker-compose.yml adicionadas e depois docker-compose up -d.
+ - Projeto criado com nest new 05-nest-clean.
+ - Configurações com docker-compose.yml adicionadas e depois docker-compose up -d.
+ - Configuração do prisma com npm i prisma -D e npm i @prisma/client e depois npx prisma init. No schema.prisma gerado, definir models. Modificar DATABASE_URL no .env de acordo com as configurações do docker e rodar npx prisma migrate dev.

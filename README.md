@@ -2,3 +2,4 @@
  - Configurações com docker-compose.yml adicionadas e depois docker-compose up -d.
  - Configuração do prisma com npm i prisma -D e npm i @prisma/client e depois npx prisma init. No schema.prisma gerado, definir models, remover output e usar provider prisma-client-js. Modificar DATABASE_URL no .env de acordo com as configurações do docker e rodar npx prisma migrate dev.
  - Criar prisma.service.ts para conectar com banco de dados e importar em app.module.ts.
+ - JWT chaves publica e privada geradas no git bash por openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048 e openssl rsa -pubout -in private_key.pem -out public_key.pem e converter para base64 para salvar no env.

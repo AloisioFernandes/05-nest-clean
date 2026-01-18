@@ -1,9 +1,10 @@
-import { right, type Either } from "@/core/either.js";
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
-import { QuestionAttachmentList } from "../../enterprise/entities/question-attachment-list.js";
-import { QuestionAttachment } from "../../enterprise/entities/question-attachment.js";
-import { Question } from "../../enterprise/entities/question.js";
-import type { QuestionsRepository } from "../repositories/questions-repository.js";
+import { right, type Either } from "@/core/either";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { Injectable } from "@nestjs/common";
+import { Question } from "../../enterprise/entities/question";
+import { QuestionAttachment } from "../../enterprise/entities/question-attachment";
+import { QuestionAttachmentList } from "../../enterprise/entities/question-attachment-list";
+import { QuestionsRepository } from "../repositories/questions-repository";
 
 interface CreateQuestionUseCaseRequest {
   authorId: string;
@@ -19,6 +20,7 @@ type CreateQuestionUseCaseResponse = Either<
   }
 >;
 
+@Injectable()
 export class CreateQuestionUseCase {
   constructor(private questionsRepository: QuestionsRepository) {}
 

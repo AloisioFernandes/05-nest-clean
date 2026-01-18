@@ -1,7 +1,7 @@
-import { left, right, type Either } from "@/core/either.js";
-import { ResourceNotFoundError } from "../../../../core/errors/errors/resource-not-found-error.js";
-import type { Question } from "../../enterprise/entities/question.js";
-import type { QuestionsRepository } from "../repositories/questions-repository.js";
+import { left, right, type Either } from "@/core/either";
+import { ResourceNotFoundError } from "../../../../core/errors/errors/resource-not-found-error";
+import type { Question } from "../../enterprise/entities/question";
+import type { QuestionsRepository } from "../repositories/questions-repository";
 
 interface GetQuestionBySlugUseCaseRequest {
   slug: string;

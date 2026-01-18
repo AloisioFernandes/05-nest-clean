@@ -1,8 +1,8 @@
-import { DomainEvents } from "@/core/events/domain-events.js";
-import type { EventHandler } from "@/core/events/event-handler.js";
-import type { AnswersRepository } from "@/domain/forum/application/repositories/answers-repository.js";
-import { QuestionBestAnswerChosenEvent } from "@/domain/forum/enterprise/events/question-best-answer-chosen.js";
-import type { SendNotificationUseCase } from "../use-cases/send-notification.js";
+import { DomainEvents } from "@/core/events/domain-events";
+import type { EventHandler } from "@/core/events/event-handler";
+import type { AnswersRepository } from "@/domain/forum/application/repositories/answers-repository";
+import { QuestionBestAnswerChosenEvent } from "@/domain/forum/enterprise/events/question-best-answer-chosen";
+import type { SendNotificationUseCase } from "../use-cases/send-notification";
 
 export class OnQuestionBestAnswerChosen implements EventHandler {
   constructor(

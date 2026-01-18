@@ -1,8 +1,8 @@
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
-import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository.js";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository";
 import { describe, expect, it } from "vitest";
-import { InMemoryQuestionAttachmentsRepository } from "../../../../../test/repositories/in-memory-question-attachments-repository.js";
-import { CreateQuestionUseCase } from "./create-question.js";
+import { InMemoryQuestionAttachmentsRepository } from "../../../../../test/repositories/in-memory-question-attachments-repository";
+import { CreateQuestionUseCase } from "./create-question";
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;

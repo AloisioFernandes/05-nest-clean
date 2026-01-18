@@ -1,5 +1,5 @@
-import type { PaginationParams } from "@/core/repositories/pagination-params.js";
-import type { Answer } from "../../enterprise/entities/answer.js";
+import type { PaginationParams } from "@/core/repositories/pagination-params";
+import type { Answer } from "../../enterprise/entities/answer";
 
 export interface AnswersRepository {
   findById(id: string): Promise<Answer | null>;

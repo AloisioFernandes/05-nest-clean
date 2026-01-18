@@ -1,8 +1,8 @@
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
-import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answer-attachements-repository.js";
-import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository.js";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answer-attachements-repository";
+import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 import { describe, expect, it } from "vitest";
-import { AnswerQuestionUseCase } from "./answer-question.js";
+import { AnswerQuestionUseCase } from "./answer-question";
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let inMemoryAnswersRepository: InMemoryAnswersRepository;

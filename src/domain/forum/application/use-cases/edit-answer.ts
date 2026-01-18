@@ -1,12 +1,12 @@
-import { left, right, type Either } from "@/core/either.js";
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
-import { NotAllowedError } from "../../../../core/errors/errors/not-allowed-error.js";
-import { ResourceNotFoundError } from "../../../../core/errors/errors/resource-not-found-error.js";
-import { AnswerAttachmentList } from "../../enterprise/entities/answer-attachment-list.js";
-import { AnswerAttachment } from "../../enterprise/entities/answer-attachment.js";
-import type { Answer } from "../../enterprise/entities/answer.js";
-import type { AnswerAttachmentsRepository } from "../repositories/answer-attachments-repository.js";
-import type { AnswersRepository } from "../repositories/answers-repository.js";
+import { left, right, type Either } from "@/core/either";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { NotAllowedError } from "../../../../core/errors/errors/not-allowed-error";
+import { ResourceNotFoundError } from "../../../../core/errors/errors/resource-not-found-error";
+import { AnswerAttachmentList } from "../../enterprise/entities/answer-attachment-list";
+import { AnswerAttachment } from "../../enterprise/entities/answer-attachment";
+import type { Answer } from "../../enterprise/entities/answer";
+import type { AnswerAttachmentsRepository } from "../repositories/answer-attachments-repository";
+import type { AnswersRepository } from "../repositories/answers-repository";
 
 interface EditAnswerUseCaseRequest {
   authorId: string;

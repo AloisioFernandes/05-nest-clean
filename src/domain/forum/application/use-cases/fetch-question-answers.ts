@@ -1,6 +1,6 @@
-import { right, type Either } from "@/core/either.js";
-import type { Answer } from "../../enterprise/entities/answer.js";
-import type { AnswersRepository } from "../repositories/answers-repository.js";
+import { right, type Either } from "@/core/either";
+import type { Answer } from "../../enterprise/entities/answer";
+import type { AnswersRepository } from "../repositories/answers-repository";
 
 interface FetchQuestionAnswersUseCaseRequest {
   page: number;

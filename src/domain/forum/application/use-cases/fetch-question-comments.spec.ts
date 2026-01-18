@@ -1,7 +1,7 @@
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
-import { makeQuestionComment } from "test/factories/make-question-comment.js";
-import { InMemoryQuestionCommentsRepository } from "test/repositories/in-memory-question-comments-repository.js";
-import { FetchQuestionCommentsUseCase } from "./fetch-question-comments.js";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { makeQuestionComment } from "test/factories/make-question-comment";
+import { InMemoryQuestionCommentsRepository } from "test/repositories/in-memory-question-comments-repository";
+import { FetchQuestionCommentsUseCase } from "./fetch-question-comments";
 
 let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository;
 let sut: FetchQuestionCommentsUseCase;

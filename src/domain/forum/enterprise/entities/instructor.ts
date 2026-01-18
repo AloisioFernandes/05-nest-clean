@@ -1,5 +1,5 @@
-import { Entity } from "@/core/entities/entity.js";
-import type { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
+import { Entity } from "@/core/entities/entity";
+import type { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 interface InstructorProps {
   name: string;

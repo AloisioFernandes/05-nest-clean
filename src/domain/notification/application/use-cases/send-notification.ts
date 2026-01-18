@@ -1,7 +1,7 @@
-import { right, type Either } from "@/core/either.js";
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
-import { Notification } from "../../enterprise/entities/notification.js";
-import type { NotificationsRepository } from "../repositories/notifications-repository.js";
+import { right, type Either } from "@/core/either";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { Notification } from "../../enterprise/entities/notification";
+import type { NotificationsRepository } from "../repositories/notifications-repository";
 
 export interface SendNotificationUseCaseRequest {
   recipientId: string;

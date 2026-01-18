@@ -1,8 +1,8 @@
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import {
   Question,
   type QuestionProps,
-} from "@/domain/forum/enterprise/entities/question.js";
+} from "@/domain/forum/enterprise/entities/question";
 import { faker } from "@faker-js/faker";
 
 export function makeQuestion(

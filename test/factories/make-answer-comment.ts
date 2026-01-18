@@ -1,5 +1,5 @@
-import { UniqueEntityID } from "@/core/entities/unique-entity-id.js";
-import { AnswerComment, type AnswerCommentProps } from "@/domain/forum/enterprise/entities/answer-comment.js";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { AnswerComment, type AnswerCommentProps } from "@/domain/forum/enterprise/entities/answer-comment";
 import { faker } from "@faker-js/faker";
 
 export function makeAnswerComment(

@@ -1,6 +1,6 @@
-import type { PaginationParams } from "@/core/repositories/pagination-params.js";
-import type { AnswerCommentsRepository } from "@/domain/forum/application/repositories/answer-comments-repository.js";
-import type { AnswerComment } from "@/domain/forum/enterprise/entities/answer-comment.js";
+import type { PaginationParams } from "@/core/repositories/pagination-params";
+import type { AnswerCommentsRepository } from "@/domain/forum/application/repositories/answer-comments-repository";
+import type { AnswerComment } from "@/domain/forum/enterprise/entities/answer-comment";
 
 export class InMemoryAnswerCommentsRepository
   implements AnswerCommentsRepository

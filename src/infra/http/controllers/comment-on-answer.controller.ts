@@ -2,7 +2,7 @@ import { CommentOnAnswerUseCase } from "@/domain/forum/application/use-cases/com
 import { CurrentUser } from "@/infra/auth/current-user-decorator";
 import type { UserPayload } from "@/infra/auth/jwt.strategy";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe";
-import { BadRequestException, Body, Controller, Param, Post } from "@nestjs/common";
+import { BadRequestException, Body, Controller, HttpCode, Param, Post } from "@nestjs/common";
 import { z } from "zod";
 
 const commentOnAnswerBodySchema = z.object({
@@ -18,6 +18,7 @@ export class CommentOnAnswerController {
   constructor(private commentOnAnswer: CommentOnAnswerUseCase) {}
 
   @Post()
+  @HttpCode(201)
   async handle(
     @Body(bodyValidationPipe) body: CommentOnAnswerBodySchema,
     @CurrentUser() user: UserPayload,
@@ -35,5 +36,11 @@ export class CommentOnAnswerController {
     if (result.isLeft()) {
       throw new BadRequestException();
     }
+
+    const { answerComment } = result.value;
+
+    return {
+      id: answerComment.id.toString(),
+    };
   }
 }

@@ -27,7 +27,7 @@ export class PrismaAnswerCommentMapper {
       answerId: answerComment.answerId.toString(),
       content: answerComment.content,
       createdAt: answerComment.createdAt,
-      updatedAt: answerComment.updatedAt,
+      updatedAt: answerComment.updatedAt ?? undefined,
     };
   }
 }

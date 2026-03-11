@@ -1,6 +1,6 @@
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { makeAnswerAttachment } from "test/factories/make-answer-attachment";
 import { makeAnswer } from "test/factories/make-answer";
+import { makeAnswerAttachment } from "test/factories/make-answer-attachment";
 import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answer-attachements-repository";
 import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
 import { NotAllowedError } from "../../../../core/errors/errors/not-allowed-error";
@@ -15,12 +15,12 @@ describe("Edit Answer", () => {
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository();
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
-      inMemoryAnswerAttachmentsRepository
+      inMemoryAnswerAttachmentsRepository,
     );
 
     sut = new EditAnswerUseCase(
       inMemoryAnswersRepository,
-      inMemoryAnswerAttachmentsRepository
+      inMemoryAnswerAttachmentsRepository,
     );
   });
 
@@ -29,7 +29,7 @@ describe("Edit Answer", () => {
       {
         authorId: new UniqueEntityID("author-1"),
       },
-      new UniqueEntityID("answer-1")
+      new UniqueEntityID("answer-1"),
     );
 
     await inMemoryAnswersRepository.create(newAnswer);
@@ -42,7 +42,7 @@ describe("Edit Answer", () => {
       makeAnswerAttachment({
         answerId: newAnswer.id,
         attachmentId: new UniqueEntityID("2"),
-      })
+      }),
     );
 
     await sut.execute({
@@ -57,10 +57,10 @@ describe("Edit Answer", () => {
     });
 
     expect(
-      inMemoryAnswersRepository?.items[0]?.attachments.currentItems
+      inMemoryAnswersRepository?.items[0]?.attachments.currentItems,
     ).toHaveLength(2);
     expect(
-      inMemoryAnswersRepository?.items[0]?.attachments.currentItems
+      inMemoryAnswersRepository?.items[0]?.attachments.currentItems,
     ).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityID("1") }),
       expect.objectContaining({ attachmentId: new UniqueEntityID("3") }),
@@ -72,7 +72,7 @@ describe("Edit Answer", () => {
       {
         authorId: new UniqueEntityID("author-1"),
       },
-      new UniqueEntityID("answer-1")
+      new UniqueEntityID("answer-1"),
     );
 
     await inMemoryAnswersRepository.create(newAnswer);
@@ -86,5 +86,47 @@ describe("Edit Answer", () => {
 
     expect(result.isLeft()).toBe(true);
     expect(result.value).toBeInstanceOf(NotAllowedError);
+  });
+
+  it("should sync new and removed attachments when editing an answer", async () => {
+    const newAnswer = makeAnswer(
+      {
+        authorId: new UniqueEntityID("author-1"),
+      },
+      new UniqueEntityID("answer-1"),
+    );
+
+    await inMemoryAnswersRepository.create(newAnswer);
+
+    inMemoryAnswerAttachmentsRepository.items.push(
+      makeAnswerAttachment({
+        answerId: newAnswer.id,
+        attachmentId: new UniqueEntityID("1"),
+      }),
+      makeAnswerAttachment({
+        answerId: newAnswer.id,
+        attachmentId: new UniqueEntityID("2"),
+      }),
+    );
+
+    const result = await sut.execute({
+      answerId: newAnswer.id.toValue(),
+      authorId: "author-1",
+      content: "Conteúdo teste",
+      attachmentsIds: ["1", "3"],
+    });
+
+    expect(result.isRight()).toBe(true);
+    expect(inMemoryAnswerAttachmentsRepository.items).toHaveLength(2);
+    expect(inMemoryAnswerAttachmentsRepository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          attachmentId: new UniqueEntityID("1"),
+        }),
+        expect.objectContaining({
+          attachmentId: new UniqueEntityID("3"),
+        }),
+      ]),
+    );
   });
 });

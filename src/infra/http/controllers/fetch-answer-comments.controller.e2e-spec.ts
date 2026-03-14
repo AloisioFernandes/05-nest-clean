@@ -20,7 +20,12 @@ describe("Fetch answer comments (E2E)", () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AnswerFactory, AnswerCommentFactory],
+      providers: [
+        StudentFactory,
+        QuestionFactory,
+        AnswerFactory,
+        AnswerCommentFactory,
+      ],
     }).compile();
 
     app = moduleRef.createNestApplication();
@@ -35,18 +40,20 @@ describe("Fetch answer comments (E2E)", () => {
   });
 
   test("[GET] /answers/:answerId/comments", async () => {
-    const user = await studentFactory.makePrismaStudent();
+    const user = await studentFactory.makePrismaStudent({
+      name: "John Doe",
+    });
 
     const accessToken = jwt.sign({ sub: user.id.toString() });
 
     const question = await questionFactory.makePrismaQuestion({
-      authorId: user.id
-    })
+      authorId: user.id,
+    });
 
     const answer = await answerFactory.makePrismaAnswer({
       authorId: user.id,
-      questionId: question.id
-    })
+      questionId: question.id,
+    });
 
     await Promise.all([
       answerCommentFactory.makePrismaAnswerComment({
@@ -71,8 +78,14 @@ describe("Fetch answer comments (E2E)", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({
       comments: expect.arrayContaining([
-        expect.objectContaining({ content: "Comment 01" }),
-        expect.objectContaining({ content: "Comment 02" }),
+        expect.objectContaining({
+          content: "Comment 01",
+          authorName: "John Doe",
+        }),
+        expect.objectContaining({
+          content: "Comment 02",
+          authorName: "John Doe",
+        }),
       ]),
     });
   });

@@ -2,9 +2,11 @@ import { makeAnswer } from "test/factories/make-answer";
 import { makeQuestion } from "test/factories/make-question";
 import { InMemoryAnswerAttachmentsRepository } from "test/repositories/in-memory-answer-attachements-repository";
 import { InMemoryAnswersRepository } from "test/repositories/in-memory-answers-repository";
+import { InMemoryAttachmentsRepository } from "test/repositories/in-memory-attachments-repository";
 import { InMemoryNotificationsRepository } from "test/repositories/in-memory-notifications-repository";
 import { InMemoryQuestionAttachmentsRepository } from "test/repositories/in-memory-question-attachments-repository";
 import { InMemoryQuestionsRepository } from "test/repositories/in-memory-questions-repository";
+import { InMemoryStudentsRepository } from "test/repositories/in-memory-students-repository";
 import { waitFor } from "test/utils/wait-for";
 import type { MockInstance } from "vitest";
 import { SendNotificationUseCase } from "../use-cases/send-notification";
@@ -15,6 +17,8 @@ let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryAnswersAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let inMemoryAnswersRepository: InMemoryAnswersRepository;
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository;
+let inMemoryStudentsRepository: InMemoryStudentsRepository;
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository;
 let sendNotificationUseCase: SendNotificationUseCase;
 
 let sendNotificationExecuteSpy: MockInstance;
@@ -23,25 +27,29 @@ describe("On Question Best Answer Chosen ", () => {
   beforeEach(() => {
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository();
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository();
+    inMemoryStudentsRepository = new InMemoryStudentsRepository();
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
-      inMemoryQuestionAttachmentsRepository
+      inMemoryQuestionAttachmentsRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentsRepository,
     );
     inMemoryAnswersAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository();
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
-      inMemoryAnswersAttachmentsRepository
+      inMemoryAnswersAttachmentsRepository,
     );
     inMemoryNotificationsRepository = new InMemoryNotificationsRepository();
 
     sendNotificationUseCase = new SendNotificationUseCase(
-      inMemoryNotificationsRepository
+      inMemoryNotificationsRepository,
     );
 
     sendNotificationExecuteSpy = vi.spyOn(sendNotificationUseCase, "execute");
 
     new OnQuestionBestAnswerChosen(
       inMemoryAnswersRepository,
-      sendNotificationUseCase
+      sendNotificationUseCase,
     );
   });
 

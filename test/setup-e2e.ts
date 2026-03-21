@@ -1,11 +1,12 @@
 import { config } from "dotenv";
 
+import { DomainEvents } from "@/core/events/domain-events";
 import { PrismaClient } from "@prisma/client";
 import { execSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 
-config({ path: '.env', override: true });
-config({ path: '.env.test', override: true });
+config({ path: ".env", override: true });
+config({ path: ".env.test", override: true });
 
 const prisma = new PrismaClient();
 
@@ -30,7 +31,7 @@ async function waitForDatabase(maxAttempts = 50): Promise<void> {
       if (i === maxAttempts - 1) {
         throw new Error("Database did not become ready in time");
       }
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
   }
 }
@@ -47,7 +48,7 @@ async function runMigration(retries = 3) {
         throw error;
       }
       // Wait before retrying
-      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+      await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
     }
   }
 }
@@ -56,6 +57,8 @@ beforeAll(async () => {
   const databaseURL = generateUniqueDatabaseURL(schemaId);
 
   process.env.DATABASE_URL = databaseURL;
+
+  DomainEvents.shouldRun = false;
 
   // Wait for database to be ready before running migrations
   await waitForDatabase();
